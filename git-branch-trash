@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+function error() {
+    echo "$@" >> /dev/stderr
+    exit 1
+}
+
 function show-usage() {
 cat << EOD
 NAME
@@ -26,11 +31,6 @@ EXAMPLES
 EOD
 }
 
-if [ $# == 0 ]; then
-    show-usage
-    exit 1;
-fi
-
 OPTIONS=()
 for OPTION in "$@"; do
     case "$OPTION" in
@@ -45,3 +45,14 @@ for OPTION in "$@"; do
             ;;
     esac
 done
+
+if [ ${#OPTIONS[@]} == 0 ]; then
+    show-usage
+    exit 1;
+else
+    which git >> /dev/null
+    if [ $? != 0 ]; then
+        error "git command does not exists"
+    fi
+fi
+
