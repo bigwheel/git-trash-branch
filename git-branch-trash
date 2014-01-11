@@ -58,10 +58,26 @@ function check_git_repository_existence() {
     fi
 }
 
+# FIXME: 本当はここで受け取るブランチ名をエスケープする必要がある
+# ※git branch --list <pattern>はpatternで受け取った文字列を
+# shellのワイルドカードとして処理してしまうため
+function exist_given_branch() {
+    if [ -z "$(git branch --list $@)" ]; then
+        echo 0
+    else
+        echo 1
+    fi
+}
+
 if [ ${#OPTIONS[@]} == 0 ]; then
     error "$USAGE"
 else
     check_git_command_existence
     check_git_repository_existence
+
+    SRC_BRANCH_NAME=${OPTIONS[0]}
+    if [ $(exist_given_branch $SRC_BRANCH_NAME) == 0 ]; then
+        error "Branch '$@' does not exists."
+    fi
 fi
 
