@@ -45,9 +45,16 @@ for OPTION in "$@"; do
 done
 
 function check_git_command_existence() {
-    which git >> /dev/null
+    which git > /dev/null 2>&1
     if [ $? != 0 ]; then
-        error "git command does not exists"
+        error "Git command does not exists."
+    fi
+}
+
+function check_git_repository_existence() {
+    git status > /dev/null 2>&1
+    if [ $? != 0 ]; then
+        error "Here is not a git repository."
     fi
 }
 
@@ -55,5 +62,6 @@ if [ ${#OPTIONS[@]} == 0 ]; then
     error "$USAGE"
 else
     check_git_command_existence
+    check_git_repository_existence
 fi
 
