@@ -12,10 +12,12 @@ describe 'git-trash-branch' do
 
   before :all do
     `mkdir -p #{TEMP_DIRECTORY_FOR_TEST}`
+    BEFORE_PWD = Dir::pwd
     Dir::chdir TEMP_DIRECTORY_FOR_TEST
     `git init`
     `echo 'test_text' > test_file`
     `git add test_file && git commit -m "first commit"`
+    Dir::chdir BEFORE_PWD
   end
 
   after :all do
