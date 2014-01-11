@@ -87,7 +87,7 @@ else
     # (理想的にはそれらをコマンドオプションで制御できればいい。
     # イメージはyum install -y ~~~の-yのような感じ)
     if [ $(exist_given_branch $DST_BRANCH_NAME) == 1 ]; then
-        error "Branch '$@' already exists."
+        error "Branch '$DST_BRANCH_NAME' already exists."
     fi
 
     git branch -m $SRC_BRANCH_NAME $DST_BRANCH_NAME
