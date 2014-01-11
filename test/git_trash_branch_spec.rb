@@ -40,9 +40,9 @@ describe 'git-trash-branch' do
   end
 
   it 'success when a existing branch name was given' do
-    `git checkout #{SRC_BRANCH_NAME}`
+    `git branch #{SRC_BRANCH_NAME}`
     status, = systemu("#{SUBJECT_COMMAND} #{SRC_BRANCH_NAME}")
-    expect(status.exitstatus).to be_success
+    expect(status).to be_success
   end
 
   it 'does\'nt success when current brach was specified as to trash' do
