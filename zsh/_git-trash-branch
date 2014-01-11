@@ -15,4 +15,4 @@ __git-trash-branch ()
     ':old branch name:__git_branch_names'
 }
 
-__git-now-add
+__git-trash-branch
