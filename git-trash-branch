@@ -79,5 +79,15 @@ else
     if [ $(exist_given_branch $SRC_BRANCH_NAME) == 0 ]; then
         error "Branch '$@' does not exists."
     fi
+
+    DST_BRANCH_NAME="trash/${SRC_BRANCH_NAME}"
+    # TODO: 移動後のブランチ名がすでに使われている場合、
+    # コマンドを中止するのではなく自動的に.1や.2をつける、
+    # もしくはプロンプトでそうするか聞く、などの対応をするべき
+    # (理想的にはそれらをコマンドオプションで制御できればいい。
+    # イメージはyum install -y ~~~の-yのような感じ)
+    if [ $(exist_given_branch $DST_BRANCH_NAME) == 1 ]; then
+        error "Branch '$@' already exists."
+    fi
 fi
 
