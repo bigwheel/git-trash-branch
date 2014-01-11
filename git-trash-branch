@@ -11,6 +11,7 @@ NAME
 
 SYNOPSIS
        git branch-trash <branch>
+       git branch-trash -h
 
 DESCRIPTION
        Append "trash/" to the branch name.
