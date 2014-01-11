@@ -26,4 +26,9 @@ EXAMPLES
 EOD
 }
 
+if [ $# == 0 ]; then
+    show-usage
+    exit 1;
+fi
+
 echo "test"
