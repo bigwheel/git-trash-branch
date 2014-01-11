@@ -5,8 +5,7 @@ function error() {
     exit 1
 }
 
-function show-usage() {
-cat << EOD
+USAGE=`cat <<'EOD'
 NAME
        git-branch-trash - Move a branch to trash box
 
@@ -28,8 +27,7 @@ EXAMPLES
        If you want to pick up that branch from trash box, simply move it as
        below command.
            $ git branch -m trash/branch1 branch1
-EOD
-}
+EOD`
 
 OPTIONS=()
 for OPTION in "$@"; do
@@ -37,8 +35,8 @@ for OPTION in "$@"; do
         "-h" )
             # --helpはgit本体のコマンドがmanコマンドへ変換してしまうようで
             # このようなオリジナルのコマンドでは使用できない(git側の微妙な仕様)
-            show-usage
-            exit
+            echo "$USAGE"
+            exit 0
             ;;
         * )
             OPTIONS+=("$OPTION")
@@ -47,8 +45,7 @@ for OPTION in "$@"; do
 done
 
 if [ ${#OPTIONS[@]} == 0 ]; then
-    show-usage
-    exit 1;
+    error "$USAGE"
 else
     which git >> /dev/null
     if [ $? != 0 ]; then
