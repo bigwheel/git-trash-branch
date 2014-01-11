@@ -31,4 +31,14 @@ if [ $# == 0 ]; then
     exit 1;
 fi
 
+for OPT in "$@"; do
+    case "$OPT" in
+        # --helpはgit本体のコマンドがmanコマンドへ変換してしまうようで
+        # このようなオリジナルのコマンドでは使用できない(git側の微妙な仕様)
+        "-h" )
+            show-usage
+            exit
+            ;;
+    esac
+done
 echo "test"
