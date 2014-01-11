@@ -44,10 +44,4 @@ describe 'git-trash-branch' do
     status, = systemu("#{SUBJECT_COMMAND} #{SRC_BRANCH_NAME}")
     expect(status).to be_success
   end
-
-  it 'does\'nt success when current brach was specified as to trash' do
-    `git checkout -b #{SRC_BRANCH_NAME}`
-    status, = systemu("#{SUBJECT_COMMAND} #{SRC_BRANCH_NAME}")
-    expect(status).not_to be_success
-  end
 end
