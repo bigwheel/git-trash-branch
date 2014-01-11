@@ -26,31 +26,31 @@ describe 'git-trash-branch' do
 
   it 'does\'nt success when a branch name was not given' do
     status, = systemu(SUBJECT_COMMAND)
-    expect(status).not_to be_success
+    status.should_not be_success
   end
 
   it 'success when -h option was given' do
     status, = systemu("#{SUBJECT_COMMAND} -h")
-    expect(status).to be_success
+    status.should be_success
   end
 
   it 'does\'nt success when a branch name didn\'t exist' do
     status, _, stderr = systemu("#{SUBJECT_COMMAND} #{SRC_BRANCH_NAME}")
-    expect(status).not_to be_success
-    expect(stderr).to include("Branch 'src_branch' does not exists.")
+    status.should_not be_success
+    stderr.should include("Branch 'src_branch' does not exists.")
   end
 
   it 'success when a existing branch name was given' do
     `git branch #{SRC_BRANCH_NAME}`
     status, = systemu("#{SUBJECT_COMMAND} #{SRC_BRANCH_NAME}")
-    expect(status).to be_success
+    status.should be_success
   end
 
   it 'does\'nt success when a same name branch exists in "trash/"' do
     `git branch #{SRC_BRANCH_NAME}`
     `git branch #{DST_BRANCH_NAME}`
     status, _, stderr = systemu("#{SUBJECT_COMMAND} #{SRC_BRANCH_NAME}")
-    expect(status).not_to be_success
-    expect(stderr).to include("Branch 'trash/src_branch' already exists.")
+    status.should_not be_success
+    stderr.should include("Branch 'trash/src_branch' already exists.")
   end
 end
