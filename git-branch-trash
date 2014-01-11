@@ -34,9 +34,9 @@ fi
 OPTIONS=()
 for OPTION in "$@"; do
     case "$OPTION" in
-        # --helpはgit本体のコマンドがmanコマンドへ変換してしまうようで
-        # このようなオリジナルのコマンドでは使用できない(git側の微妙な仕様)
         "-h" )
+            # --helpはgit本体のコマンドがmanコマンドへ変換してしまうようで
+            # このようなオリジナルのコマンドでは使用できない(git側の微妙な仕様)
             show-usage
             exit
             ;;
