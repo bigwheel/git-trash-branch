@@ -1,0 +1,18 @@
+#compdef git-trash-branch
+# vim:set filetype=zsh
+#
+# git-trash-branch ZSH completion function
+#
+# Installation
+# ------------
+# Drop this somewhere in your $fpath (like /usr/share/zsh/site-functions)
+#
+
+__git-trash-branch ()
+{
+  _arguments -s :\
+    '(-h)'-h'[show help message]'\
+    ':old branch name:__git_branch_names'
+}
+
+__git-now-add
