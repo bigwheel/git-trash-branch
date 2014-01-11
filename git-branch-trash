@@ -44,12 +44,16 @@ for OPTION in "$@"; do
     esac
 done
 
-if [ ${#OPTIONS[@]} == 0 ]; then
-    error "$USAGE"
-else
+function check_git_command_existence() {
     which git >> /dev/null
     if [ $? != 0 ]; then
         error "git command does not exists"
     fi
+}
+
+if [ ${#OPTIONS[@]} == 0 ]; then
+    error "$USAGE"
+else
+    check_git_command_existence
 fi
 
