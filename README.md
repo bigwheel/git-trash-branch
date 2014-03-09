@@ -13,7 +13,7 @@ If you want to delete "branch-A",
 $ git trash-branch branch-A
 ~~~
 
-This command doesn't delete branch-A, however move "branch-A" to "trash/branch-A".
+Instead of deleting branch-A, this command move "branch-A" to "trash/branch-A".
 
 If you want to restore branch-A, simply
 
